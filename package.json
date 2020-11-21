@@ -1,0 +1,19 @@
+{
+  "name": "agile",
+  "version": "1.0.0",
+  "description": "Turns kasa plugs on/off when prices go positive/negative",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/Westlad/agile"
+  },
+  "keywords": [
+    "Octopus",
+    "Kasa"
+  ],
+  "author": "Westlad",
+  "license": "MIT"
+}
