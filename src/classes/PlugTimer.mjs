@@ -7,17 +7,18 @@ import logger from '../utils/logger.mjs';
 
 class PlugTimer {
   constructor(rate) {
-    const timeToWait = new Date(rate.valid_from) - new Date(Date.now());
-    if (timeToWait < 0) throw new Error('Cannot set a negative plug timer');
     this.rate = rate;
-    this.p = new Promise(
-      resolve => setTimeout(resolve, timeToWait),
-    );
+    logger.info(`Created new plug timer for ${rate.valid_from}`);
   }
 
   async set() {
-    await this.p; // wait until price is negative
-    const plugs = await getPlugs(); // get a list of available plugs
+    const timeToWait = new Date(this.rate.valid_from) - new Date(Date.now());
+    logger.debug(`setting plug timer with time to wait ${Math.floor(timeToWait / 60000)} minutes`);
+    if (timeToWait < 0) throw new Error('Cannot set a negative plug timer');
+    await new Promise(
+      resolve => setTimeout(resolve, timeToWait),
+    );
+    const plugs = await getPlugs; // get a list of available plugs
     logger.info('turning plugs on');
     plugs.forEach(plug => plug.setPowerState(true)); // turn them on
     await new Promise(

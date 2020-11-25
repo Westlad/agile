@@ -12,7 +12,7 @@ export async function getRates() {
   const filteredRates = [];
   rates.forEach(rate => {
     const timeToWait = new Date(rate.valid_from) - new Date(Date.now());
-    if (timeToWait > 0 && rate.value_inc_vat > ON_PRICE) filteredRates.push(rate);
+    if (timeToWait > 0 && rate.value_inc_vat < ON_PRICE) filteredRates.push(rate);
   });
   return filteredRates;
 }
@@ -20,6 +20,7 @@ export async function getRates() {
 export async function setPlugTimers(rates) {
   for (const rate of rates) {
     try {
+      logger.silly(`setting plug timer for ${rate.valid_from}`);
       const plugTimer = new PlugTimer(rate);
       plugTimer.set();
     } catch (err) {
