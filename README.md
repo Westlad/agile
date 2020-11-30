@@ -1,4 +1,4 @@
-#Agile
+# Agile
 
 This is a simple program that reads Octopus Agile data and turns on tp-link Kasa smart plugs when the electricity price is negative.  It will exit once it has run out of Agile data.  I just hacked this quickly for my own use so it's not consumer-grade code; you'll probably need a bit of Nodejs knowledge to make it do what you want.  That said, it's very short and simple.
 
